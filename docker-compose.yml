@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - '15432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=payment
+    volumes:
+      - mpu_pg_data:/bitnami/postgresql
+
+  pgadmin-docker:
+    image: dpage/pgadmin4
+    container_name: dev-pgadmin
+    ports:
+      - '5050:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    volumes:
+      - mpu_pgAdmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+ 
+volumes:
+  mpu_pg_data:
+  mpu_pgAdmin_data:
+
+
+networks:
+  pgcloudbeaver-network-external:
+    driver: bridge
