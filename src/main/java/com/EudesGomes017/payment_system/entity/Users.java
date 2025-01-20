@@ -2,6 +2,7 @@ package com.EudesGomes017.payment_system.entity;
 
 
 import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,10 +12,9 @@ import java.util.Collection;
 
 @Getter
 @Setter
-@Entity(name = "users")
+@Entity
 @Table(name = "users")
 public class Users implements UserDetails {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -32,6 +32,9 @@ public class Users implements UserDetails {
 
     private String role;
 
+    public Users() {
+    }
+
     public Users(Long id, String name, String email, String password, String verificationCode, boolean enabled) {
         this.id = id;
         this.name = name;
@@ -48,7 +51,10 @@ public class Users implements UserDetails {
         this.role = role;
     }
 
-    public Users() {
+    public Users(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     @Override
@@ -60,6 +66,11 @@ public class Users implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -81,6 +92,4 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
-
-
 }
