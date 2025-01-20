@@ -1,6 +1,7 @@
 package com.EudesGomes017.payment_system.service;
 
 
+import com.EudesGomes017.payment_system.dto.UserResponse;
 import com.EudesGomes017.payment_system.entity.Users;
 import com.EudesGomes017.payment_system.repository.UserRepository;
 import com.EudesGomes017.payment_system.utils.RandomString;
@@ -17,9 +18,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Users registerUser(Users user) {
+    public UserResponse registerUser(Users user) {
 
-        if(userRepository.findByEmail(user.getEmail()) != null){
+        if (userRepository.findByEmail(user.getEmail()) != null) {
             throw new RuntimeException("This email already exists");
         } else {
             String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -31,8 +32,15 @@ public class UserService {
 
             Users savedUser = userRepository.save(user);
 
+            UserResponse userResponse = new UserResponse(
 
-            return savedUser;
+                    savedUser.getId(),
+                    savedUser.getName(),
+                    savedUser.getEmail(),
+                    savedUser.getPassword()
+            );
+
+            return userResponse;
 
         }
 
