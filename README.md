@@ -1,43 +1,44 @@
-Payment System
+# Payment System - Sistema de Pagamento
 
+Este é um sistema de pagamento simples desenvolvido com **Spring Boot**, **Spring JPA**, **Spring Security**, **PostgreSQL** e **autenticação de dois fatores** via **e-mail**.
 
-Este é um sistema de pagamento simples desenvolvido com Spring Boot, Spring JPA, Spring Security, PostgreSQL e autenticação de dois fatores via e-mail.
+O sistema permite o **registro de usuários**, **login com autenticação segura** e **envio de um código de verificação para o e-mail** do usuário para autenticação de dois fatores.
 
-O sistema permite o registro de usuários, login com autenticação segura e envio de um código de verificação para o e-mail do usuário para autenticação de dois fatores.
+## Tecnologias Utilizadas
 
-Tecnologias Utilizadas
-Spring Boot - Framework principal para a construção da aplicação.
-Spring JPA - Para a integração com o banco de dados relacional.
-Spring Security - Para autenticação e autorização.
-PostgreSQL - Banco de dados relacional.
-JavaMailSender - Para o envio de e-mails de verificação de dois fatores.
-Maven - Gerenciamento de dependências e build da aplicação.
+- **Spring Boot** - Framework principal para a construção da aplicação.
+- **Spring JPA** - Para a integração com o banco de dados relacional.
+- **Spring Security** - Para autenticação e autorização.
+- **PostgreSQL** - Banco de dados relacional.
+- **JavaMailSender** - Para o envio de e-mails de verificação de dois fatores.
+- **Maven** - Gerenciamento de dependências e build da aplicação.
 
-Funcionalidades
-Registro de Usuários: Permite que novos usuários se registrem com e-mail e senha.
-Autenticação de Usuários: Autenticação segura com Spring Security.
-Autenticação de Dois Fatores: Envio de código de verificação por e-mail para garantir segurança adicional.
-Persistência de Dados: Armazenamento de dados no banco de dados PostgreSQL.
+## Funcionalidades
 
-Pré-requisitos
+- **Registro de Usuários**: Permite que novos usuários se registrem com **e-mail** e **senha**.
+- **Autenticação de Usuários**: **Autenticação segura** com **Spring Security**.
+- **Autenticação de Dois Fatores**: **Envio de código de verificação** por **e-mail** para garantir segurança adicional.
+- **Persistência de Dados**: **Armazenamento de dados** no banco de dados **PostgreSQL**.
+
+## Pré-requisitos
+
 Antes de rodar o projeto, é necessário ter as seguintes ferramentas instaladas:
 
-Java 17 ou superior
-Maven
-PostgreSQL
-IDE de sua preferência (como IntelliJ IDEA, Eclipse, VS Code)
+- [Java 11 ou superior](https://adoptopenjdk.net/)
+- [Maven](https://maven.apache.org/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [IDE de sua preferência](https://www.jetbrains.com/idea/) (como IntelliJ IDEA, Eclipse, VS Code)
 
-Configuração do Banco de Dados (PostgreSQL)
-Instale o PostgreSQL e crie um banco de dados para o seu sistema de pagamento.
+## Configuração do Banco de Dados (PostgreSQL)
 
-Crie um banco de dados com o nome payment_system (ou outro nome de sua preferência).
+1. Instale o **PostgreSQL** e crie um banco de dados para o seu sistema de pagamento.
 
-Altere as configurações do banco de dados no arquivo application.properties:
+2. Crie um banco de dados com o nome `payment_system` (ou outro nome de sua preferência).
 
-Configuração de Envio de E-mail (2FA)
-Para enviar e-mails, você precisará configurar um serviço SMTP. Aqui usamos o JavaMailSender do Spring para enviar os e-mails de verificação de dois fatores.
+3. Altere as configurações do banco de dados no arquivo `application.properties`:
 
-Adicione suas configurações de e-mail (como Gmail, SendGrid, etc.) no application.properties:
+```properties
+# application.properties
 
 server.port=8081
 
@@ -59,9 +60,13 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/payment
 spring.datasource.username=postgres
 spring.datasource.password=postgres123
 
-
 spring.security.user.enabled=false
 spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+Configuração de Envio de E-mail (2FA)
+Para enviar e-mails, você precisará configurar um serviço SMTP. Aqui usamos o JavaMailSender do Spring para enviar os e-mails de verificação de dois fatores.
+
+Adicione suas configurações de e-mail (como Gmail, SendGrid, etc.) no application.properties:
 
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
@@ -70,12 +75,13 @@ spring.mail.password=${MAIL_PASSWORD}
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 
-Estrutura do Projeto
+
+
+# Estrutura do Projeto
 Controller: Contém as classes responsáveis pelos endpoints da API.
 Service: Contém a lógica de negócios (como o envio de e-mails de verificação).
 Repository: Contém os repositórios que interagem com o banco de dados (usando Spring Data JPA).
 Model: Contém as entidades JPA que representam as tabelas no banco de dados.
-
 Exemplos de Código
 Exemplo de Serviço de Envio de E-mail (2FA)
 
@@ -513,3 +519,9 @@ public class MailService {
     }
 
 }
+
+
+
+
+Licença
+Este projeto está licenciado sob a MIT License.
