@@ -8,6 +8,7 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.EudesGomes017</groupId>
     <artifactId>payment-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>

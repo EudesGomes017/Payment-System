@@ -8,4 +8,6 @@ public interface UserRepository  extends JpaRepository<Users, Long> {
 
     UserDetails findByEmail(String email);
     Users findByVerificationCode(String verificationCode);
+
+
 }
