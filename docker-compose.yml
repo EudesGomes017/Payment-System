@@ -1,16 +1,19 @@
 version: '3.8'
 
 services:
-  postgres:
+  payment-postgres:
     image: bitnami/postgresql:latest
+    container_name: payment-postgres
     ports:
-      - '15432:5432'
+      - '5432:5432'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres123
       - POSTGRES_DB=payment
     volumes:
-      - mpu_pg_data:/bitnami/postgresql
+      - payment_pg_data:/bitnami/postgresql
+    networks:
+      - pgcloudbeaver-network-external
 
   pgadmin-docker:
     image: dpage/pgadmin4
@@ -21,14 +24,15 @@ services:
       PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
       PGADMIN_DEFAULT_PASSWORD: postgres
     volumes:
-      - mpu_pgAdmin_data:/var/lib/pgadmin
+      - payment_pgAdmin_data:/var/lib/pgadmin
     depends_on:
-      - postgres
- 
-volumes:
-  mpu_pg_data:
-  mpu_pgAdmin_data:
+      - payment-postgres  # Aqui, altere para o novo nome do serviço
+    networks:
+      - pgcloudbeaver-network-external
 
+volumes:
+  payment_pg_data:
+  payment_pgAdmin_data:
 
 networks:
   pgcloudbeaver-network-external:
