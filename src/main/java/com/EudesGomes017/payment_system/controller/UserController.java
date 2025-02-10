@@ -20,6 +20,9 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
     public ResponseEntity<UserResponse> registerUser(@RequestBody @Valid UserRequest userRequest) throws MessagingException, UnsupportedEncodingException {
 
